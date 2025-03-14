@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hammer handle -->
+  <rect x="90" y="60" width="12" height="120" rx="6" ry="6" fill="#8B4513" stroke="#000" stroke-width="2" transform="rotate(10, 96, 120)"/>
+  
+  <!-- Hammer head -->
+  <g transform="rotate(10, 60, 50)">
+    <!-- Main block -->
+    <rect x="20" y="30" width="80" height="40" rx="5" ry="5" fill="#5A5A5A" stroke="#000" stroke-width="2"/>
+    
+    <!-- Hammer face -->
+    <rect x="15" y="30" width="10" height="40" rx="2" ry="2" fill="#3B3B3B" stroke="#000" stroke-width="2"/>
+    
+    <!-- Metal texture lines -->
+    <line x1="30" y1="35" x2="30" y2="65" stroke="#3B3B3B" stroke-width="1"/>
+    <line x1="45" y1="35" x2="45" y2="65" stroke="#3B3B3B" stroke-width="1"/>
+    <line x1="60" y1="35" x2="60" y2="65" stroke="#3B3B3B" stroke-width="1"/>
+    <line x1="75" y1="35" x2="75" y2="65" stroke="#3B3B3B" stroke-width="1"/>
+    <line x1="90" y1="35" x2="90" y2="65" stroke="#3B3B3B" stroke-width="1"/>
+    
+    <!-- Claw part -->
+    <path d="M100 30 L110 30 L110 45 L100 55 Z" fill="#3B3B3B" stroke="#000" stroke-width="2"/>
+  </g>
+  
+  <!-- Handle grip texture -->
+  <rect x="92" y="85" width="8" height="5" rx="2" ry="2" fill="#704214" transform="rotate(10, 96, 87.5)"/>
+  <rect x="93" y="100" width="8" height="5" rx="2" ry="2" fill="#704214" transform="rotate(10, 97, 102.5)"/>
+  <rect x="94" y="115" width="8" height="5" rx="2" ry="2" fill="#704214" transform="rotate(10, 98, 117.5)"/>
+  <rect x="95" y="130" width="8" height="5" rx="2" ry="2" fill="#704214" transform="rotate(10, 99, 132.5)"/>
+  <rect x="96" y="145" width="8" height="5" rx="2" ry="2" fill="#704214" transform="rotate(10, 100, 147.5)"/>
+  
+  <!-- Highlight on hammer head -->
+  <ellipse cx="50" cy="40" rx="5" ry="3" fill="white" fill-opacity="0.3" transform="rotate(10, 50, 40)"/>
+  
+  <!-- Connection between head and handle -->
+  <rect x="87" y="50" width="18" height="12" rx="2" ry="2" fill="#704214" stroke="#000" stroke-width="1" transform="rotate(10, 96, 56)"/>
+</svg> 
