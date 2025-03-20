@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html --public-url ./",
+    "build": "parcel build index.html --public-url ./ && cp -r public/assets dist/",
     "predeploy": "npm run build",
     "deploy": "node deploy.js"
   },
-  "homepage": "https://teemu.github.io/cottagelympics",
+  "homepage": "https://t-mu.github.io/cottagelympics",
   "dependencies": {
     "phaser": "^3.60.0"
   },

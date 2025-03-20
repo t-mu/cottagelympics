@@ -21,6 +21,13 @@ class ItemSelectScene extends Phaser.Scene {
         this.load.svg('shovel', 'shovel.svg');
         this.load.svg('axe', 'axe.svg');
         this.load.svg('flowerPot', 'flowerPot.svg');
+
+        // Add error handling for asset loading
+        this.load.on('loaderror', (file) => {
+            console.error(`Failed to load asset: ${file.key}`);
+            // Create a fallback texture for the failed asset
+            this.createFallbackTexture(file.key);
+        });
     }
 
     create() {
@@ -262,6 +269,123 @@ class ItemSelectScene extends Phaser.Scene {
             case 'flowerPot': return 0xCD5C5C; // Indian red
             default: return 0xFFFFFF; // White
         }
+    }
+
+    createFallbackTexture(itemKey) {
+        // Check if the fallback texture already exists
+        if (this.textures.exists(itemKey)) {
+            console.log(`Texture for ${itemKey} already exists`);
+            return;
+        }
+        
+        console.log(`Creating fallback texture for ${itemKey}`);
+        
+        // Create a new sprite with a specific color based on the item
+        const color = this.getColorForItem(itemKey);
+        const graphics = this.add.graphics();
+        
+        // Size of our texture
+        const width = 100;
+        const height = 100;
+        
+        // Create appropriate shape based on the item
+        switch(itemKey) {
+            case 'hammer':
+                // Create a more distinct hammer
+                graphics.fillStyle(0x8B4513, 1); // Brown handle
+                graphics.fillRect(40, 20, 50, 15); // Handle
+                graphics.fillStyle(0x888888, 1); // Gray head
+                graphics.fillRect(10, 10, 40, 35); // Head
+                break;
+                
+            case 'rake':
+                // Create a more distinct rake
+                graphics.fillStyle(0x8B4513, 1); // Brown handle
+                graphics.fillRect(45, 20, 15, 70); // Handle
+                graphics.fillStyle(0x8B4513, 1); // Brown head
+                graphics.fillRect(20, 15, 65, 10); // Head
+                // Teeth
+                for (let i = 0; i < 5; i++) {
+                    graphics.fillRect(25 + i * 12, 25, 6, 20);
+                }
+                break;
+                
+            case 'shovel':
+                // Create a more distinct shovel
+                graphics.fillStyle(0x8B4513, 1); // Brown handle
+                graphics.fillRect(45, 10, 10, 50); // Handle
+                graphics.fillStyle(0x999999, 1); // Gray blade
+                graphics.beginPath();
+                graphics.moveTo(30, 60);
+                graphics.lineTo(70, 60);
+                graphics.lineTo(60, 90);
+                graphics.lineTo(40, 90);
+                graphics.closePath();
+                graphics.fill();
+                break;
+                
+            case 'axe':
+                // Create a more distinct axe
+                graphics.fillStyle(0x8B4513, 1); // Brown handle
+                graphics.fillRect(45, 30, 10, 60); // Handle
+                graphics.fillStyle(0x999999, 1); // Gray blade
+                graphics.beginPath();
+                graphics.moveTo(45, 30);
+                graphics.lineTo(20, 15);
+                graphics.lineTo(15, 30);
+                graphics.lineTo(40, 45);
+                graphics.closePath();
+                graphics.fill();
+                break;
+                
+            case 'flowerPot':
+                // Create a more distinct flower pot
+                graphics.fillStyle(0xCD5C5C, 1); // Pot color
+                graphics.beginPath();
+                graphics.moveTo(35, 50);
+                graphics.lineTo(65, 50);
+                graphics.lineTo(60, 90);
+                graphics.lineTo(40, 90);
+                graphics.closePath();
+                graphics.fill();
+                // Flower
+                graphics.fillStyle(0xFFD700, 1); // Yellow center
+                graphics.fillCircle(50, 30, 10);
+                graphics.fillStyle(0xFF8C00, 1); // Orange petals
+                graphics.fillCircle(40, 20, 8);
+                graphics.fillCircle(60, 20, 8);
+                graphics.fillCircle(40, 40, 8);
+                graphics.fillCircle(60, 40, 8);
+                // Stem
+                graphics.fillStyle(0x228B22, 1); // Green stem
+                graphics.fillRect(48, 45, 4, 15);
+                break;
+                
+            default:
+                // Default square with item color
+                graphics.fillStyle(color, 1);
+                graphics.fillRect(20, 20, 60, 60);
+        }
+        
+        // Add a border to make item stand out more
+        graphics.lineStyle(2, 0x000000, 0.8);
+        if (itemKey === 'hammer') {
+            graphics.strokeRect(10, 10, 40, 35); // Head border
+            graphics.strokeRect(40, 20, 50, 15); // Handle border
+        } else if (itemKey === 'rake') {
+            graphics.strokeRect(45, 20, 15, 70); // Handle border
+            graphics.strokeRect(20, 15, 65, 10); // Head border
+            // Teeth borders
+            for (let i = 0; i < 5; i++) {
+                graphics.strokeRect(25 + i * 12, 25, 6, 20);
+            }
+        }
+        
+        // Generate a texture from the graphics
+        graphics.generateTexture(itemKey, width, height);
+        graphics.destroy();
+        
+        console.log(`Created fallback texture for ${itemKey}`);
     }
 }
 
